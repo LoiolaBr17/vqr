@@ -1,26 +1,30 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { EventsService } from 'src/app/services/events.service';
-import { eventItem } from 'src/interfaces/eventItem';
-
+import { IEventItem } from 'src/interfaces/IEventItem';
+import { LCST_KEYS } from '../../../../utils/constants';
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent {
   isOpen = false;
-  events$!: Observable<eventItem[]>;
+  events: IEventItem[] = [];
 
-  constructor(
-    private eventsService: EventsService,
-    private router: Router
-  ) {}
+  constructor(private eventsService: EventsService, private router: Router) {}
 
   ngOnInit() {
-    this.events$ = this.eventsService.getEvents();
+    localStorage.removeItem(LCST_KEYS.EVENTO_ATUAL);
+
+    const observableEvents: Observable<{ [key: number]: IEventItem }> =
+      this.eventsService.getEvents();
+
+    observableEvents.subscribe((data) => {
+      this.events = Object.values(data);
+    });
   }
 
   openModal() {
@@ -32,18 +36,12 @@ export class EventsComponent {
   }
 
   submitForm(formvalue: any) {
-    this.eventsService.setEvent(
-      formvalue.value.eventName, 
-      formvalue.value.qtdSenhas,
-      formvalue.value.valueSenha,
-      formvalue.value.boitv
-    )
+    this.eventsService.setEvent(formvalue.value);
     this.isOpen = false;
   }
 
-  enterProject(event: eventItem) {
-    this.eventsService.setEventSelected(event);
+  enterProject(eventId: number) {
+    this.eventsService.setEventSelected(eventId);
     this.router.navigate(['/dashboard']);
   }
-
 }

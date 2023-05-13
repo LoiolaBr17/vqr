@@ -1,32 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './pages/login/login.component';
-import { EventsComponent } from './pages/events/events.component';
+import { AddPassComponent } from './pages/add-pass/add-pass.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AddPasswordComponent } from './pages/add-password/add-password.component';
+import { EventsComponent } from './pages/events/events.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'events',
-    component: EventsComponent
+    component: EventsComponent,
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
-    path: 'set_password',
-    component: AddPasswordComponent
-  }
+    path: 'set_pass',
+    component: AddPassComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

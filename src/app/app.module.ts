@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 
 // Serviços
 import { AuthService } from './services/auth.service';
 import { EventsService } from './services/events.service';
+import { PassService } from './services/pass.service';
+import { PaymentService } from './services/payment.service';
 
 // Telas
-import { LoginComponent } from './pages/login/login.component';
-import { EventsComponent } from './pages/events/events.component';
+import { AddPassComponent } from './pages/add-pass/add-pass.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AddPasswordComponent } from './pages/add-password/add-password.component';
-
+import { EventsComponent } from './pages/events/events.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +23,10 @@ import { AddPasswordComponent } from './pages/add-password/add-password.componen
     LoginComponent,
     EventsComponent,
     DashboardComponent,
-    AddPasswordComponent
+    AddPassComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-  ],
-  providers: [AuthService, EventsService],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [AuthService, EventsService, PassService, PaymentService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

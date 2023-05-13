@@ -1,27 +1,35 @@
 import { Component } from '@angular/core';
-import { eventItem } from 'src/interfaces/eventItem';
-import { EventsService } from 'src/app/services/events.service';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { EventsService } from 'src/app/services/events.service';
+import { IEventItem } from 'src/interfaces/IEventItem';
+import { IPass } from 'src/interfaces/IPass';
+import { PassService } from './../../services/pass.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  events$!: Observable<eventItem>;
+  events$!: Observable<IEventItem>;
+  senhas: { [key: number]: IPass } = {};
 
   constructor(
     private eventsService: EventsService,
-    private router: Router,
-  ) { }
+    private passService: PassService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.events$ = this.eventsService.getEventSelected();
+
+    this.passService.getPasses().subscribe((senhas) => {
+      this.senhas = senhas as { [key: number]: IPass };
+    });
   }
 
   assignPassword() {
-    this.router.navigate(['/set_password']);
+    this.router.navigate(['/set_pass']);
   }
 }

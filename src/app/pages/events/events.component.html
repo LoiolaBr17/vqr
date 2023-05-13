@@ -1,39 +1,39 @@
 <button (click)="openModal()">Criar Evento</button>
 
-<ng-container *ngIf="(events$ | async) as events">
+<ng-container *ngIf="events.length">
   <div *ngFor="let event of events">
     <p>{{ event.eventName }}</p>
     <p>{{ event.qtdSenhas }}</p>
     <p>{{ event.valueSenha }}</p>
-    <p>{{ event.boitv }}</p>
-    <button (click)="enterProject(event)">Gerenciar Evento</button>
+    <p>{{ event.boiTv }}</p>
+    <button (click)="enterProject(event.id)">Gerenciar Evento</button>
   </div>
 </ng-container>
 
 <div class="modal" *ngIf="isOpen">
-    <form class="modal-content" #f="ngForm" (submit)="submitForm(f)">
-      <h2>Modal</h2>
-      <div class="form-group">
-        <label for="eventName">Nome do Evento:</label>
-        <input type="text" id="eventName" name="eventName" ngModel>
-      </div>
+  <form class="modal-content" #f="ngForm" (submit)="submitForm(f)">
+    <h2>Modal</h2>
+    <div class="form-group">
+      <label for="eventName">Nome do Evento:</label>
+      <input type="text" id="eventName" name="eventName" ngModel />
+    </div>
 
-      <div class="form-group">
-        <label for="eventName">Quantidade inicial de senhas:</label>
-        <input type="number" id="qtdSenhas" name="qtdSenhas" ngModel>
-      </div>
+    <div class="form-group">
+      <label for="eventName">Quantidade inicial de senhas:</label>
+      <input type="number" id="qtdSenhas" name="qtdSenhas" ngModel />
+    </div>
 
-      <div class="form-group">
-        <label for="eventName">Valor de uma senha:</label>
-        <input type="number" id="valueSenha" name="valueSenha" ngModel>
-      </div>
+    <div class="form-group">
+      <label for="eventName">Valor de uma senha:</label>
+      <input type="number" id="valueSenha" name="valueSenha" ngModel />
+    </div>
 
-      <div class="radio-group">
-        <label for="boitv">Boi Tv:</label>
-        <input type="number" id="boitv" name="boitv" ngModel>
-      </div>
+    <div class="radio-group">
+      <label for="eventName">Boi Tv:</label>
+      <input type="number" id="boiTv" name="boiTv" ngModel />
+    </div>
 
-      <button class="close-button" (click)="closeModal()">Fechar</button>
-      <button>Criar</button>
-    </form>
+    <button class="close-button" (click)="closeModal()">Fechar</button>
+    <button>Criar</button>
+  </form>
 </div>

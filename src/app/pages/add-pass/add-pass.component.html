@@ -1,0 +1,175 @@
+<main id="container">
+  <form #f="ngForm" (ngSubmit)="openModal(f)">
+    <div>
+      <label>
+        Puxador
+        <input type="text" name="puxador" required ngModel />
+      </label>
+      <label>
+        Cavalo
+        <input type="text" name="cavalo" required ngModel />
+      </label>
+      <label>
+        Esteira
+        <input type="text" name="esteira" required ngModel />
+      </label>
+      <label>
+        Cavalo Esteira
+        <input type="text" name="cavalo_esteira" required ngModel />
+      </label>
+      <label>
+        Representação
+        <input type="text" name="representacao" required ngModel />
+      </label>
+      <label>
+        Município
+        <input type="text" name="municipio" required ngModel />
+      </label>
+      <label>
+        Estado
+        <input type="text" name="estado" required ngModel />
+      </label>
+    </div>
+
+    <div class="radio-group">
+      <label>
+        Bonificação
+        <div>
+          <input type="radio" name="bonificacao" value="sim" required ngModel />
+          Sim
+        </div>
+      </label>
+      <label>
+        <div>
+          <input type="radio" name="bonificacao" value="nao" required ngModel />
+          Não
+        </div>
+      </label>
+    </div>
+
+    <div>
+      <p>
+        Fichas Selecionadas: {{ selectedPassword }}
+        <span *ngIf="!selectedPassword">Nenhuma Ficha Selecionada</span>
+      </p>
+
+      <div *ngIf="selectedPassword">
+        <div>
+          <input [(ngModel)]="precoPadraoSenha" name="valorSenha" />
+        </div>
+
+        <div class="radio-group">
+          <label>
+            <div>
+              <input type="checkbox" name="dinheiro" value="dinheiro" ngModel />
+              Dinheiro
+              <input type="radio" name="boi_tv" value="sim" required ngModel />
+            </div>
+          </label>
+
+          <label>
+            <div>
+              <input type="radio" name="boi_tv" value="nao" required ngModel />
+              Não
+            </div>
+          </label>
+        </div>
+
+        <label>
+          Forma de pagamento
+          <div>
+            <label>
+              <div>
+                <input
+                  type="checkbox"
+                  name="dinheiro"
+                  value="dinheiro"
+                  ngModel
+                />
+                Dinheiro
+                <input type="number" name="valor_dinheiro" ngModel />
+              </div>
+            </label>
+
+            <label>
+              <div>
+                <input type="checkbox" name="pix" value="pix" ngModel />
+                Pix
+                <input type="number" name="valor_pix" ngModel />
+              </div>
+            </label>
+
+            <label>
+              <div>
+                <input type="checkbox" name="cartao" value="cartao" ngModel />
+                Cartão
+                <input type="number" name="valor_cartao" ngModel />
+              </div>
+            </label>
+
+            <label>
+              <div>
+                <input type="checkbox" name="cheque" value="cheque" ngModel />
+                Cheque
+                <input type="number" name="valor_cheque" ngModel />
+              </div>
+            </label>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div class="button-container">
+    <button *ngFor="let i of [1]" class="button" (click)="selectPassword(i)">
+      {{ i }}
+    </button>
+  </div>
+</main>
+
+<div class="modal" *ngIf="isOpen">
+  <form
+    class="modal-content"
+    #f="ngForm"
+    id="content"
+    #content
+    (submit)="submitForm(f)"
+  >
+    <h2>Confirmar atribuição ?</h2>
+    <div class="form-group">
+      <label>Puxador: {{ info.puxador }}</label>
+      <label>Cavalo: {{ info.cavalo }}</label>
+    </div>
+
+    <div class="form-group">
+      <label>Esteira: {{ info.esteira }}</label>
+      <label>Cavalo: {{ info.cavalo_esteira }}</label>
+    </div>
+
+    <div class="form-group">
+      <label>Munícipio: {{ info.municipio }}</label>
+      <label>Estado: {{ info.estado }}</label>
+    </div>
+
+    <div class="form-group">
+      <label
+        >Bonificação:
+        {{ info.bonificacao === "sim" ? "Sim" : "Sem bonificação" }}</label
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Forma de pagamento:</label>
+      <ul>
+        <li *ngFor="let item of formPayment">
+          {{ item.forma }}: {{ item.value }}
+        </li>
+      </ul>
+    </div>
+
+    <button class="close-button" (click)="closeModal()">Fechar</button>
+    <button>Criar</button>
+  </form>
+</div>
