@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EventsService } from 'src/app/services/events.service';
 import { IEventItem } from 'src/interfaces/IEventItem';
 import { IPass } from 'src/interfaces/IPass';
+import { LCST_KEYS } from 'utils/constants';
 import { PassService } from './../../services/pass.service';
 
 @Component({
@@ -24,8 +25,11 @@ export class DashboardComponent {
   ngOnInit() {
     this.events$ = this.eventsService.getEventSelected();
 
-    this.passService.getPasses().subscribe((senhas) => {
-      this.senhas = senhas as { [key: number]: IPass };
+    const idEvento = Number(localStorage.getItem(LCST_KEYS.EVENTO_ATUAL));
+
+    this.passService.getPasses().subscribe((senhas: any) => {
+      console.log(senhas[idEvento] || {});
+      this.senhas = senhas[idEvento] || {};
     });
   }
 

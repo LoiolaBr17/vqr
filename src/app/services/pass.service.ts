@@ -52,12 +52,7 @@ export class PassService {
   }
 
   getPasses() {
-    const eventoCorrenteId = Number(
-      localStorage.getItem(LCST_KEYS.EVENTO_ATUAL)
-    );
-
-    return this.Passes.asObservable().pipe((dt: any) => {
-       return dt[eventoCorrenteId] || {}
-      });
+    const eventoId = Number(localStorage.getItem(LCST_KEYS.EVENTO_ATUAL));
+    return this.Passes.asObservable();
   }
 }
