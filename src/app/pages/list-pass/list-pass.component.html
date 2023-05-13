@@ -1,24 +1,54 @@
 <section>
+    <div id="nav">
+        <h2>Senhas</h2>
+        <div>
+            <input 
+                type="search" 
+                placeholder="buscar por senha" 
+                [(ngModel)]="searchText"
+                (input)="filtrarSenhas()">
+        </div>
+    </div>
+
     <div class="container-pass">
-        <div *ngFor="let item of pass | keyvalue" class="item-pass">
+        <div *ngFor="let item of passFilter | keyvalue" class="item-pass">
             <div>{{ item.value.nome }}</div>
 
-            <div *ngIf="item.value.disponivel === false">
+            <!-- <div *ngIf="item.value.disponivel === false">
                 <p>{{ item.value.infos.vaqueiro }}</p>
                 <p>{{ item.value.infos.cavalo }}</p>
                 <p>Outro campo qualquer</p>
-            </div>
+            </div> -->
 
-            <div *ngIf="item.value.disponivel === true">
+            <!-- <div *ngIf="item.value.disponivel === true">
                 <p>-</p>
                 <p>-</p>
                 <p>-</p>
-            </div>
+            </div> -->
 
-            <div>
+            <!-- <div>
                 <button>Ver mais</button>
-            </div>
+            </div> -->
         </div>
 
+    </div>
+
+    <div id="footer">
+        <button (click)="voltar()">Voltar</button>
+
+        <div class="footer-checkbox">
+            <label for="senhas_todas">Todas as senhas</label>
+            <input type="checkbox" name="senhas_todas"  [(ngModel)]="senhas_todas_filtro" (click)="toggleFilter('senhas_todas_filtro')"/>
+        </div>
+
+        <div class="footer-checkbox">
+            <label for="senhas_vendidas">Senhas vendidas</label>
+            <input type="checkbox" name="senhas_vendidas"  [(ngModel)]="senhas_vendidas_filtro" (click)="toggleFilter('senhas_vendidas_filtro')"/>
+        </div>
+
+        <div class="footer-checkbox">
+            <label for="senhas_livres">Senhas livres</label>
+            <input type="checkbox" name="senhas_livres"  [(ngModel)]="senhas_livres_filtro" (click)="toggleFilter('senhas_livres_filtro')"/>
+        </div>
     </div>
 </section>
