@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { IEventItem } from 'src/interfaces/IEventItem';
 import { LCST_KEYS } from './../../../utils/constants/index';
+import { PassService } from './pass.service';
+import { PaymentService } from './payment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +28,10 @@ export class EventsService {
     this.initialCredential
   );
 
-  constructor() {}
+  constructor(
+    private paymentService: PaymentService,
+    private passService: PassService
+  ) {}
 
   setEvent(eventData: any) {
     const data = {
@@ -55,5 +60,24 @@ export class EventsService {
 
   getEventSelected() {
     return this.EventSelected.asObservable();
+  }
+
+  getEventPayments() {
+    const eventoAtualSenha = Number(
+      localStorage.getItem(LCST_KEYS.EVENTO_ATUAL)
+    );
+    const senhas = JSON.parse(localStorage.getItem(LCST_KEYS.SENHAS) || '{}');
+    const pagamentos = JSON.parse(
+      localStorage.getItem(LCST_KEYS.PAGAMENTOS) || '{}'
+    );
+
+    const listaSenhas = Object.keys(senhas[eventoAtualSenha] || {});
+
+    return Object.entries(pagamentos)
+      .filter(([key]) => listaSenhas.includes(key))
+      .reduce(
+        (acc: any[], [, current]: any[]) => [...acc, ...Object.values(current)],
+        []
+      );
   }
 }
