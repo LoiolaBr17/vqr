@@ -16,6 +16,7 @@ import { AddPassComponent } from './pages/add-pass/add-pass.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EventsComponent } from './pages/events/events.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ListPassComponent } from './pages/list-pass/list-pass.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoginComponent } from './pages/login/login.component';
     EventsComponent,
     DashboardComponent,
     AddPassComponent,
+    ListPassComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [AuthService, EventsService, PassService, PaymentService],

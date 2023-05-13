@@ -1,0 +1,14 @@
+.container-pass {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+
+    .item-pass {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ddd;
+        padding: 10px;
+
+    }
+}

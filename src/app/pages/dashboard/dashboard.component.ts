@@ -32,4 +32,8 @@ export class DashboardComponent {
   assignPassword() {
     this.router.navigate(['/set_pass']);
   }
+
+  goToListPassword() {
+    this.router.navigate(['/list_pass']);
+  }
 }
