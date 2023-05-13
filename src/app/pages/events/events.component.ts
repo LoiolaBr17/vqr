@@ -16,6 +16,13 @@ export class EventsComponent {
 
   constructor(private eventsService: EventsService, private router: Router) {}
 
+  currencyMask(value: number) {
+    return Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value);
+  }
+
   ngOnInit() {
     localStorage.removeItem(LCST_KEYS.EVENTO_ATUAL);
 

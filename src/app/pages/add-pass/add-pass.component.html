@@ -1,126 +1,140 @@
-<main id="container">
-  <form #f="ngForm" (ngSubmit)="openModal(f)">
-    <div>
-      <label>
-        Puxador
+<main class="container">
+  <div class="form-column">
+    <form #f="ngForm" (ngSubmit)="openModal(f)">
+      <div>
+        <label for="puxador"> Puxador </label>
         <input type="text" name="puxador" required ngModel />
-      </label>
-      <label>
-        Cavalo
+      </div>
+
+      <div>
+        <label for="cavalo"> Cavalo </label>
         <input type="text" name="cavalo" required ngModel />
-      </label>
-      <label>
-        Esteira
+      </div>
+
+      <div>
+        <label for="esteira"> Esteira </label>
         <input type="text" name="esteira" required ngModel />
-      </label>
-      <label>
-        Cavalo Esteira
+      </div>
+
+      <div>
+        <label for="cavalo_esteira"> Cavalo Esteira </label>
         <input type="text" name="cavalo_esteira" required ngModel />
-      </label>
-      <label>
-        Representação
+      </div>
+
+      <div>
+        <label for="representação"> Representação </label>
         <input type="text" name="representacao" required ngModel />
-      </label>
-      <label>
-        Município
+      </div>
+
+      <div>
+        <label for="municipio"> Município </label>
         <input type="text" name="municipio" required ngModel />
-      </label>
-      <label>
-        Estado
+      </div>
+
+      <div>
+        <label for="estado"> Estado </label>
         <input type="text" name="estado" required ngModel />
-      </label>
-    </div>
+      </div>
 
-    <div class="radio-group">
-      <label>
-        Bonificação
+      <div class="radio-group">
+        <p>Bonificação</p>
+
         <div>
-          <input type="radio" name="bonificacao" value="sim" required ngModel />
-          Sim
-        </div>
-        <div>
-          <input type="radio" name="bonificacao" value="nao" required ngModel />
-          Não
-        </div>
-      </label>
-    </div>
+          <div>
+            <label>Sim</label>
+            <input
+              type="radio"
+              name="bonificacao"
+              value="sim"
+              required
+              ngModel
+            />
+          </div>
 
-    <div>
-      <p>
-        Fichas Selecionadas: {{ selectedPassword }}
-        <span *ngIf="!selectedPassword">Nenhuma Ficha Selecionada</span>
-      </p>
-
-      <div *ngIf="selectedPassword">
-        <div>
-          <input [(ngModel)]="precoPadraoSenha" name="valorSenha" />
+          <div>
+            <label>Não</label>
+            <input
+              type="radio"
+              name="bonificacao"
+              value="nao"
+              required
+              ngModel
+            />
+          </div>
         </div>
+      </div>
 
-        <div class="radio-group">
-          <label>
-            <div>
-              <label for="boi_tv">Boi Tv:</label>
+      <div class="form-fichas">
+        <p>
+          <span *ngIf="selectedPass">
+            Ficha selecionada: {{ selectedPass.nome }}
+          </span>
+
+          <span *ngIf="!selectedPass">Nenhuma ficha selecionada</span>
+        </p>
+
+        <div *ngIf="selectedPass">
+          <div>
+            <label>Valor da senha: </label>
+            <input [(ngModel)]="precoPadraoSenha" name="valorSenha" />
+          </div>
+
+          <div class="radio-group">
+            <label for="boi_tv">Boi Tv:</label>
+
+            <div class="opcao">
               <input type="radio" name="boi_tv" value="sim" required ngModel />
               Sim
             </div>
 
-            <div>
+            <div class="opcao">
+              <label>Não</label>
               <input type="radio" name="boi_tv" value="nao" required ngModel />
-              Não
             </div>
-          </label>
-        </div>
-
-        <label>
-          Forma de pagamento
-          <div>
-            <label>
-              <div>
-                <input
-                  type="checkbox"
-                  name="dinheiro"
-                  value="dinheiro"
-                  ngModel
-                />
-                Dinheiro
-                <input type="number" name="valor_dinheiro" ngModel />
-              </div>
-            </label>
-
-            <label>
-              <div>
-                <input type="checkbox" name="pix" value="pix" ngModel />
-                Pix
-                <input type="number" name="valor_pix" ngModel />
-              </div>
-            </label>
-
-            <label>
-              <div>
-                <input type="checkbox" name="cartao" value="cartao" ngModel />
-                Cartão
-                <input type="number" name="valor_cartao" ngModel />
-              </div>
-            </label>
-
-            <label>
-              <div>
-                <input type="checkbox" name="cheque" value="cheque" ngModel />
-                Cheque
-                <input type="number" name="valor_cheque" ngModel />
-              </div>
-            </label>
           </div>
-        </label>
+
+          <div>
+            <p>Forma de pagamento</p>
+            <div>
+              <label for="dinheiro">Dinheiro</label>
+              <input type="checkbox" name="dinheiro" value="dinheiro" ngModel />
+              <input type="number" name="valor_dinheiro" ngModel />
+            </div>
+
+            <div>
+              <label for="pix"> Pix </label>
+              <input type="checkbox" name="pix" value="pix" ngModel />
+              <input type="number" name="valor_pix" ngModel />
+            </div>
+
+            <div>
+              <label for="cartao"> Cartão </label>
+
+              <input type="checkbox" name="cartao" value="cartao" ngModel />
+              <input type="number" name="valor_cartao" ngModel />
+            </div>
+
+            <div>
+              <label> Cheque </label>
+              <input type="checkbox" name="cheque" value="cheque" ngModel />
+              <input type="number" name="valor_cheque" ngModel />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <button type="submit">Enviar</button>
-  </form>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
-  <div class="button-container">
-    <button *ngFor="let i of options" class="button" (click)="selectPassword(i)">
-      {{ i }}
+  <div class="pass-column">
+    <button
+      *ngFor="let i of options"
+      [ngClass]="{ block: !i.disponivel }"
+      class="button"
+      (click)="selectPassword(i)"
+    >
+      {{ i.nome }}
     </button>
   </div>
 </main>

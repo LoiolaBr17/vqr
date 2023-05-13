@@ -1,5 +1,68 @@
 <section>
-  <button (click)="assignPassword()">Atribuir Senha</button>
-  <br>
-  <button (click)="goToListPassword()">Listar Senhas</button>
+  <div class="nav">
+    <div>
+      <h2>Senhas:</h2>
+      <input
+        type="search"
+        placeholder="buscar por senha"
+        [(ngModel)]="searchText"
+        (input)="filtrarSenhas()"
+      />
+    </div>
+
+    <button (click)="assignPassword()">Nova senha</button>
+  </div>
+
+  <div class="container-pass">
+    <div *ngFor="let item of passFilter | keyvalue" class="item-pass">
+      {{ item.value.nome }}
+
+      <div *ngIf="item.value.disponivel === false">
+        <p>{{ item.value.infos.representacao }}</p>
+        <p>{{ item.value.infos.vaqueiro }}</p>
+      </div>
+
+      <!-- <div *ngIf="item.value.disponivel === true">
+              <p>-</p>
+              <p>-</p>
+              <p>-</p>
+          </div> -->
+
+      <!-- <div>
+              <button>Ver mais</button>
+          </div> -->
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-checkbox">
+      <label for="senhas_todas">Todas as senhas</label>
+      <input
+        type="checkbox"
+        name="senhas_todas"
+        [(ngModel)]="senhas_todas_filtro"
+        (click)="toggleFilter('senhas_todas_filtro')"
+      />
+    </div>
+
+    <div class="footer-checkbox">
+      <label for="senhas_vendidas">Senhas vendidas</label>
+      <input
+        type="checkbox"
+        name="senhas_vendidas"
+        [(ngModel)]="senhas_vendidas_filtro"
+        (click)="toggleFilter('senhas_vendidas_filtro')"
+      />
+    </div>
+
+    <div class="footer-checkbox">
+      <label for="senhas_livres">Senhas livres</label>
+      <input
+        type="checkbox"
+        name="senhas_livres"
+        [(ngModel)]="senhas_livres_filtro"
+        (click)="toggleFilter('senhas_livres_filtro')"
+      />
+    </div>
+  </div>
 </section>

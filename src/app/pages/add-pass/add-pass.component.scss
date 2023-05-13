@@ -1,60 +1,65 @@
-#container {
+.container {
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  gap: 50px;
-}
 
-form {
-    width: 450px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  
-    label {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-  
-      input[type="text"],
-      input[type="number"],
-      input[type="radio"] {
-        margin-top: 4px;
+  .form-column {
+    width: 33%;
+
+    form {
+      input {
+        width: 100%;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: min-content;
+      }
+
+      input[type="number"] {
+        display: none;
+      }
+
+      input[type="checkbox"]:checked ~ input[type="number"] {
+        display: inline-block;
+      }
+
+      div.radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        p {
+          font-weight: bold;
+        }
       }
     }
-  
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-  
-    input[type="checkbox"] {
-      margin-right: 8px;
-    }
-  
-    input[type="number"] {
-      display: none;
-    }
-  
-    input[type="checkbox"]:checked ~ input[type="number"] {
-      display: inline-block;
-    }
-  
-    button[type="submit"] {
-      margin-top: 16px;
-    }
-}
+  }
 
-.button-container {
-  float: right;
-  padding: 1em;
-  margin-right: 50px;
-  width: 300px;
-  height: 300px;
-  max-height: 400px;
-  overflow-y: scroll;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
-  border: 1px solid #000;
+  .pass-column {
+    width: min-content;
+    max-height: 400px;
+    padding-right: 5px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+
+    overflow-y: auto;
+
+    button {
+      border: none;
+      padding: 5px;
+      background-color: #ffc656;
+
+      cursor: pointer;
+
+      &.block {
+        background-color: grey;
+        cursor: default;
+      }
+    }
+  }
 }
 
 .modal {
@@ -68,7 +73,7 @@ form {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  
+
   &-content {
     background-color: #fff;
     padding: 20px;
@@ -81,29 +86,29 @@ form {
   }
 
   .form-group {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 
-      label {
-          margin-bottom: 10px;
-      }
+    label {
+      margin-bottom: 10px;
+    }
   }
 
   .radio-group {
-      display: flex;
-      align-items: center;
-      
-      input[type="radio"] {
-        margin-right: 10px;
-      }
-      
-      label {
-        margin-right: 20px;
-      }
+    display: flex;
+    align-items: center;
+
+    input[type="radio"] {
+      margin-right: 10px;
     }
-  
+
+    label {
+      margin-right: 20px;
+    }
+  }
+
   .close-button {
-      margin: auto;
+    margin: auto;
   }
 }

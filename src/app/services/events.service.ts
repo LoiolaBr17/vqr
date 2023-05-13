@@ -55,11 +55,11 @@ export class EventsService {
 
   setEventSelected(eventId: number) {
     localStorage.setItem(LCST_KEYS.EVENTO_ATUAL, String(eventId));
-    this.EventSelected.next(this.Events.getValue()[eventId]);
+    this.EventSelected.next(this.Events.getValue()[Number(eventId)]);
   }
 
   getEventSelected() {
-    return this.EventSelected.asObservable();
+    return this.Events.asObservable();
   }
 
   getEventPayments() {
@@ -73,11 +73,16 @@ export class EventsService {
 
     const listaSenhas = Object.keys(senhas[eventoAtualSenha] || {});
 
-    return Object.fromEntries ( Object.entries(pagamentos)
-      .filter(([key]) => listaSenhas.includes(key))
-      .reduce(
-        (acc: any[], [, current]: any[]) => [...acc, ...Object.entries(current)],
-        []
-      ));
+    return Object.fromEntries(
+      Object.entries(pagamentos)
+        .filter(([key]) => listaSenhas.includes(key))
+        .reduce(
+          (acc: any[], [, current]: any[]) => [
+            ...acc,
+            ...Object.entries(current),
+          ],
+          []
+        )
+    );
   }
 }

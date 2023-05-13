@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import { EventsService } from 'src/app/services/events.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { IEventItem } from 'src/interfaces/IEventItem';
+import { LCST_KEYS } from './../../../../utils/constants/index';
 import { PassService } from './../../services/pass.service';
 
 @Component({
@@ -11,11 +12,11 @@ import { PassService } from './../../services/pass.service';
   styleUrls: ['./add-pass.component.scss'],
 })
 export class AddPassComponent {
-  options: number[] = [];
+  options: any[] = [];
   evento: IEventItem = {} as IEventItem;
 
   precoPadraoSenha: string = '';
-  selectedPassword: number = 0;
+  selectedPass: any = 0;
 
   formPayment: { forma: string; value: any }[] = [];
   isOpen = false;
@@ -30,18 +31,27 @@ export class AddPassComponent {
   ) {}
 
   ngOnInit() {
+    const eventoId = Number(localStorage.getItem(LCST_KEYS.EVENTO_ATUAL));
     this.eventsService.getEventSelected().subscribe((evento) => {
-      this.evento = evento;
+      this.evento = evento[eventoId];
 
-      if (evento.qtdSenhas) {
-        this.options = Array.from(
-          { length: evento.qtdSenhas },
-          (_, i) => i + 1
+      this.passService.getPasses().subscribe((eventosSenhas) => {
+        const senhas = eventosSenhas[this.evento.id];
+        const senhaJaCadastradas = Object.values(senhas).map(({ nome }) =>
+          Number(nome)
         );
-      }
 
-      if (evento.valueSenha) {
-        this.precoPadraoSenha = String(evento.valueSenha);
+        this.options = Array.from(
+          { length: this.evento.qtdSenhas },
+          (_, i) => ({
+            nome: i + 1,
+            disponivel: !senhaJaCadastradas.includes(i + 1),
+          })
+        );
+      });
+
+      if (this.evento.valueSenha) {
+        this.precoPadraoSenha = String(this.evento.valueSenha);
       }
     });
   }
@@ -77,8 +87,8 @@ export class AddPassComponent {
     this.isOpen = false;
   }
 
-  selectPassword(password: any) {
-    this.selectedPassword = password;
+  selectPassword(pass: any) {
+    if (pass.disponivel) this.selectedPass = pass;
   }
 
   submitForm(f: any) {
@@ -87,7 +97,7 @@ export class AddPassComponent {
 
     const pass = this.passService.setPass({
       disponivel: true,
-      nome: this.selectedPassword,
+      nome: this.selectedPass.nome,
       infos,
     });
 

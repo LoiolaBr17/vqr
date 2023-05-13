@@ -1,5 +1,22 @@
-* {
-    padding: 0;
-    margin: 0 !important;
-    box-sizing: border-box;
+.container-app {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+
+.left-bar {
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+
+  background-color: #ffc656;
+}
+
+.app-content {
+  flex: 1;
+  height: 100%;
+
+  padding: 20px;
+
+  overflow-y: auto;
 }

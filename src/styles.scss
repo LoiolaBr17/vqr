@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root,
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}

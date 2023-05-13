@@ -1,12 +1,19 @@
-<button (click)="openModal()">Criar Evento</button>
+<div class="header">
+  <p>Eventos:</p>
+  <button (click)="openModal()">Criar Evento</button>
+</div>
 
 <ng-container *ngIf="events.length">
-  <div *ngFor="let event of events">
-    <p>{{ event.eventName }}</p>
-    <p>{{ event.qtdSenhas }}</p>
-    <p>{{ event.valueSenha }}</p>
-    <p>{{ event.boiTv }}</p>
-    <button (click)="enterProject(event.id)">Gerenciar Evento</button>
+  <div class="eventos-container">
+    <div *ngFor="let event of events">
+      <p>Nome: {{ event.eventName }}</p>
+      <p>Total de senhas: {{ event.qtdSenhas }}</p>
+      <p>Valor senha uni.: {{ currencyMask(event.valueSenha) }}</p>
+      <p>Valor boi TV: {{ currencyMask(event.boiTv) }}</p>
+      <button class="gerir-evento-button" (click)="enterProject(event.id)">
+        Gerenciar Evento
+      </button>
+    </div>
   </div>
 </ng-container>
 

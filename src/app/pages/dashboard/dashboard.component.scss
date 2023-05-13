@@ -1,0 +1,57 @@
+button {
+  border: none;
+  background-color: #ffc656;
+  color: white;
+  font-size: 14px;
+  padding: 5px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+
+    div:first-child {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  .container-pass {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    overflow-y: auto;
+
+    .item-pass {
+      padding: 10px;
+      height: min-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ddd;
+    }
+  }
+
+  .footer {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+#nav {
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5em;
+  margin-bottom: 1em;
+  align-items: center;
+}
