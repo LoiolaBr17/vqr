@@ -27,7 +27,13 @@ export class PaymentService {
       id: new Date().getTime(),
     };
 
-    this.initialCredentials[passId][data.id] = data;
+    const valueToSave = {
+      [passId]: {
+        ...this.initialCredentials[passId],
+        [data.id]: data,
+      },
+    };
+    Object.assign(this.initialCredentials, valueToSave);
 
     localStorage.setItem(
       LCST_KEYS.PAGAMENTOS,

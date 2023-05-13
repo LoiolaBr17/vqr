@@ -56,6 +56,8 @@ export class PassService {
       localStorage.getItem(LCST_KEYS.EVENTO_ATUAL)
     );
 
-    return this.Passes.asObservable().pipe((dt: any) => dt[eventoCorrenteId]);
+    return this.Passes.asObservable().pipe((dt: any) => {
+       return dt[eventoCorrenteId] || {}
+      });
   }
 }
