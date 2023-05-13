@@ -59,9 +59,7 @@
         <div class="radio-group">
           <label>
             <div>
-              <input type="checkbox" name="dinheiro" value="dinheiro" ngModel />
-              Dinheiro
-              <br>
+              <label for="boi_tv">Boi Tv:</label>
               <input type="radio" name="boi_tv" value="sim" required ngModel />
               Sim
             </div>
@@ -121,7 +119,7 @@
   </form>
 
   <div class="button-container">
-    <button *ngFor="let i of [1]" class="button" (click)="selectPassword(i)">
+    <button *ngFor="let i of options" class="button" (click)="selectPassword(i)">
       {{ i }}
     </button>
   </div>
