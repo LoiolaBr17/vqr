@@ -39,8 +39,12 @@ export class DashboardComponent {
     });
   }
 
-  assignPassword() {
+  assignPass() {
     this.router.navigate(['/set_pass']);
+  }
+
+  listPass() {
+    this.router.navigate(['/list_pass']);
   }
 
   filtrarSenhas() {
