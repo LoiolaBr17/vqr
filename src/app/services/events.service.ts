@@ -73,11 +73,11 @@ export class EventsService {
 
     const listaSenhas = Object.keys(senhas[eventoAtualSenha] || {});
 
-    return Object.entries(pagamentos)
+    return Object.fromEntries ( Object.entries(pagamentos)
       .filter(([key]) => listaSenhas.includes(key))
       .reduce(
-        (acc: any[], [, current]: any[]) => [...acc, ...Object.values(current)],
+        (acc: any[], [, current]: any[]) => [...acc, ...Object.entries(current)],
         []
-      );
+      ));
   }
 }
