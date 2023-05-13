@@ -36,7 +36,7 @@ export class AddPassComponent {
       this.evento = evento[eventoId];
 
       this.passService.getPasses().subscribe((eventosSenhas) => {
-        const senhas = eventosSenhas[this.evento.id];
+        const senhas = eventosSenhas[this.evento.id] || {};
         const senhaJaCadastradas = Object.values(senhas).map(({ nome }) =>
           Number(nome)
         );
@@ -79,7 +79,7 @@ export class AddPassComponent {
     }
 
     this.info = f.value;
-    console.log(f.value);
+
     this.isOpen = true;
   }
 
@@ -108,21 +108,21 @@ export class AddPassComponent {
       });
     }
 
-    if (valor_dinheiro) {
+    if (valor_cheque) {
       this.paymentService.setPayment(pass.id, {
         tipo: 'cheque',
         valor: valor_cheque,
       });
     }
 
-    if (valor_dinheiro) {
+    if (valor_pix) {
       this.paymentService.setPayment(pass.id, {
         tipo: 'pix',
         valor: valor_pix,
       });
     }
 
-    if (valor_dinheiro) {
+    if (valor_cartao) {
       this.paymentService.setPayment(pass.id, {
         tipo: 'cartao',
         valor: valor_cartao,
